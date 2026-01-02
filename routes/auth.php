@@ -57,3 +57,37 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 });
+use App\Http\Controllers\Owner\StockManagementController;
+
+Route::middleware(['auth', 'role:owner'])->prefix('owner')->name('owner.')->group(function () {
+
+    // --- CRUD Barang / Stok Barang ---
+    Route::get('/stok', [StockManagementController::class, 'index'])->name('stok.index');
+    Route::get('/stok/create', [StockManagementController::class, 'create'])->name('stok.create');
+    Route::post('/stok', [StockManagementController::class, 'store'])->name('stok.store');
+    Route::get('/stok/{id}/edit', [StockManagementController::class, 'edit'])->name('stok.edit');
+    Route::put('/stok/{id}', [StockManagementController::class, 'update'])->name('stok.update');
+    Route::delete('/stok/{id}', [StockManagementController::class, 'destroy'])->name('stok.destroy');
+
+    // --- Stok Masuk dari Supplier ---
+    Route::get('/stok-masuk', [StockManagementController::class, 'stokMasukIndex'])->name('stok_masuk.index');
+    Route::get('/stok-masuk/create', [StockManagementController::class, 'stokMasukCreate'])->name('stok_masuk.create');
+    Route::post('/stok-masuk', [StockManagementController::class, 'stokMasukStore'])->name('stok_masuk.store');
+
+    // --- Mutasi Stok ---
+    Route::get('/mutasi-stok', [StockManagementController::class, 'mutasiIndex'])->name('mutasi.index');
+
+    // --- Stok Opname ---
+    Route::get('/stok-opname', [StockManagementController::class, 'opnameIndex'])->name('opname.index');
+    Route::post('/stok-opname', [StockManagementController::class, 'opnameStore'])->name('opname.store');
+
+    Route::get('/stok/{id}/mutasi', [StockManagementController::class, 'mutasi'])
+            ->name('stok.mutasi');
+
+        Route::post('/stok-masuk', [StockManagementController::class, 'stokMasukStore'])
+            ->name('stok.stokMasuk.store');
+
+        Route::post('/stok-opname', [StockManagementController::class, 'opnameStore'])
+            ->name('stok.opname.store');
+});
+

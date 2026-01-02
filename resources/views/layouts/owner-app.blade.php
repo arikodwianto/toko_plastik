@@ -200,8 +200,14 @@
     <div class="spinner"></div>
 </div>
 
-    <main class="container">
-        @if (session('success'))
+    <main class="app-main">
+    <div class="app-content">
+        <div class="container-fluid">
+            @yield('content')
+        </div>
+    </div>
+</main>
+
 <script>
     Swal.fire({
         icon: 'success',
