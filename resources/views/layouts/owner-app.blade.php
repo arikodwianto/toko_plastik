@@ -157,37 +157,47 @@
         
         <div class="sidebar-wrapper">
        <nav class="mt-2">
-  <!-- Sidebar Menu -->
-  <ul
-    class="nav sidebar-menu flex-column"
-    data-lte-toggle="treeview"
-    role="navigation"
-    aria-label="Main navigation"
-    data-accordion="false"
-    id="navigation"
-  >
-    <li class="nav-header">Dashboard</li>
-    <li class="nav-item border-bottom">
-      <a href="{{ route('owner.dashboard') }}"
-         class="nav-link {{ request()->routeIs('owner.dashboard') ? 'active bg-primary text-white' : '' }}">
-        <i class="nav-icon bi bi-speedometer2"></i>
-        <p>Home</p>
-      </a>
-    </li>
-     <li class="nav-header">Daftar Pengguna</li>
-   <li class="nav-item border-bottom">
-  <a href="{{ route('owner.users.index') }}"
-     class="nav-link {{ request()->routeIs('owner.users.*') ? 'active bg-primary text-white' : '' }}">
-    <i class="nav-icon bi bi-speedometer2"></i>
-    <p>User</p>
-  </a>
-</li>
+    <!-- Sidebar Menu -->
+    <ul
+        class="nav sidebar-menu flex-column"
+        data-lte-toggle="treeview"
+        role="navigation"
+        aria-label="Main navigation"
+        data-accordion="false"
+        id="navigation"
+    >
+        {{-- Dashboard --}}
+        <li class="nav-header">Dashboard</li>
+        <li class="nav-item border-bottom">
+            <a href="{{ route('owner.dashboard') }}"
+               class="nav-link {{ request()->routeIs('owner.dashboard') ? 'active bg-primary text-white' : '' }}">
+                <i class="nav-icon bi bi-speedometer2"></i>
+                <p>Home</p>
+            </a>
+        </li>
 
+        {{-- Daftar Pengguna --}}
+        <li class="nav-header">Daftar Pengguna</li>
+        <li class="nav-item border-bottom">
+            <a href="{{ route('owner.users.index') }}"
+               class="nav-link {{ request()->routeIs('owner.users.*') ? 'active bg-primary text-white' : '' }}">
+                <i class="nav-icon bi bi-people"></i>
+                <p>User</p>
+            </a>
+        </li>
 
-
-    
- 
+        {{-- Stok Barang --}}
+        <li class="nav-header">Daftar Stok Barang</li>
+        <li class="nav-item border-bottom">
+            <a href="{{ route('owner.stok.index') }}"
+               class="nav-link {{ request()->routeIs('owner.stok.*') ? 'active bg-primary text-white' : '' }}">
+                <i class="nav-icon bi bi-box-seam"></i>
+                <p>Stok</p>
+            </a>
+        </li>
+    </ul>
 </nav>
+
 
 
 
@@ -200,7 +210,7 @@
     <div class="spinner"></div>
 </div>
 
-    <main class="app-main">
+   <main class="app-main">
     <div class="app-content">
         <div class="container-fluid">
             @yield('content')
@@ -208,6 +218,7 @@
     </div>
 </main>
 
+@if(session('success'))
 <script>
     Swal.fire({
         icon: 'success',
@@ -219,9 +230,6 @@
 </script>
 @endif
 
-
-        @yield('content')
-    </main>
       <!--end::Sidebar-->
 <!--begin::Footer-->
 <footer class="app-footer bg-light border-top py-3">
@@ -333,6 +341,36 @@
       crossorigin="anonymous"
     ></script>
     <!-- ChartJS -->
+ 
+<script>
+function formatRupiah(angka) {
+    let number_string = angka.replace(/[^,\d]/g, '');
+    let split = number_string.split(',');
+    let sisa = split[0].length % 3;
+    let rupiah = split[0].substr(0, sisa);
+    let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        let separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+
+    return rupiah;
+}
+
+document.querySelectorAll('.rupiah').forEach(input => {
+    input.addEventListener('input', function () {
+        let value = this.value.replace(/\./g, '');
+        this.value = formatRupiah(value);
+
+        let hiddenInput = document.getElementById(this.id + '_value');
+        if (hiddenInput) {
+            hiddenInput.value = value;
+        }
+    });
+});
+</script>
+
     <script>
       // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
       // IT'S ALL JUST JUNK FOR DEMO

@@ -2,34 +2,64 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Barang extends Model
 {
-    use HasFactory;
-
-    protected $table = 'barang'; // WAJIB karena bukan plural bawaan Laravel
+    protected $table = 'barang';
 
     protected $fillable = [
+        'kode_barang',
         'nama',
         'stok',
         'harga_modal',
         'harga_jual',
     ];
 
-    public function stokMasuk()
+    /**
+     * Auto generate kode barang
+     */
+    protected static function boot()
     {
-        return $this->hasMany(StokMasuk::class);
+        parent::boot();
+
+        static::creating(function ($barang) {
+            $lastBarang = self::orderBy('id', 'desc')->first();
+
+            if ($lastBarang && $lastBarang->kode_barang) {
+                $lastKode = intval(substr($lastBarang->kode_barang, 4));
+                $barang->kode_barang = 'BRG-' . str_pad($lastKode + 1, 4, '0', STR_PAD_LEFT);
+            } else {
+                $barang->kode_barang = 'BRG-0001';
+            }
+        });
     }
 
-    public function mutasi()
+    /**
+     * ACCESSOR: hitung margin otomatis
+     * margin = harga jual - harga modal
+     */
+    public function getMarginAttribute()
     {
-        return $this->hasMany(MutasiStok::class);
+        return $this->harga_jual - $this->harga_modal;
     }
 
-    public function opname()
+    /**
+     * (Opsional) margin dalam persen
+     */
+    public function getMarginPersenAttribute()
     {
-        return $this->hasMany(StokOpname::class);
+        if ($this->harga_modal == 0) {
+            return 0;
+        }
+
+        return round(
+            (($this->harga_jual - $this->harga_modal) / $this->harga_modal) * 100,
+            2
+        );
+    }
+     public function getStokMenipisAttribute()
+    {
+        return $this->stok < 5;
     }
 }

@@ -22,7 +22,7 @@ Route::get('/owner/dashboard', function () {
 
 // DASHBOARD KASIR (role admin_kasir)
 Route::get('/kasir/dashboard', function () {
-    return view('kasir.dashboard');
+    return view('admin_kasir.dashboard');
 })->middleware(['auth', 'role:admin_kasir'])->name('kasir.dashboard');
 
 // PROFILE
@@ -41,5 +41,7 @@ Route::middleware(['auth', 'role:owner'])
     });
 
 require __DIR__.'/auth.php';
+
+
 
 

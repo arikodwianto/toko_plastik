@@ -9,7 +9,7 @@ class MutasiStok extends Model
     protected $table = 'mutasi_stok';
 
     protected $fillable = [
-        'item_id',
+        'barang_id',
         'jumlah',
         'tipe',
         'keterangan',

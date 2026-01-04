@@ -59,9 +59,12 @@ Route::middleware('auth')->group(function () {
 });
 use App\Http\Controllers\Owner\StockManagementController;
 
-Route::middleware(['auth', 'role:owner'])->prefix('owner')->name('owner.')->group(function () {
+Route::middleware(['auth', 'role:owner'])
+    ->prefix('owner')
+    ->name('owner.')
+    ->group(function () {
 
-    // --- CRUD Barang / Stok Barang ---
+    // === CRUD Barang ===
     Route::get('/stok', [StockManagementController::class, 'index'])->name('stok.index');
     Route::get('/stok/create', [StockManagementController::class, 'create'])->name('stok.create');
     Route::post('/stok', [StockManagementController::class, 'store'])->name('stok.store');
@@ -69,25 +72,29 @@ Route::middleware(['auth', 'role:owner'])->prefix('owner')->name('owner.')->grou
     Route::put('/stok/{id}', [StockManagementController::class, 'update'])->name('stok.update');
     Route::delete('/stok/{id}', [StockManagementController::class, 'destroy'])->name('stok.destroy');
 
-    // --- Stok Masuk dari Supplier ---
-    Route::get('/stok-masuk', [StockManagementController::class, 'stokMasukIndex'])->name('stok_masuk.index');
-    Route::get('/stok-masuk/create', [StockManagementController::class, 'stokMasukCreate'])->name('stok_masuk.create');
-    Route::post('/stok-masuk', [StockManagementController::class, 'stokMasukStore'])->name('stok_masuk.store');
+    // === Stok Masuk (MODAL DI INDEX) ===
+    Route::post('/stok-masuk', [StockManagementController::class, 'stokMasukStore'])
+        ->name('stok.masuk');
 
-    // --- Mutasi Stok ---
-    Route::get('/mutasi-stok', [StockManagementController::class, 'mutasiIndex'])->name('mutasi.index');
+    // === Stok Opname (MODAL DI INDEX) ===
+    Route::post('/stok-opname', [StockManagementController::class, 'opnameStore'])
+        ->name('stok.opname');
 
-    // --- Stok Opname ---
-    Route::get('/stok-opname', [StockManagementController::class, 'opnameIndex'])->name('opname.index');
-    Route::post('/stok-opname', [StockManagementController::class, 'opnameStore'])->name('opname.store');
-
+    // === Mutasi ===
     Route::get('/stok/{id}/mutasi', [StockManagementController::class, 'mutasi'])
-            ->name('stok.mutasi');
-
-        Route::post('/stok-masuk', [StockManagementController::class, 'stokMasukStore'])
-            ->name('stok.stokMasuk.store');
-
-        Route::post('/stok-opname', [StockManagementController::class, 'opnameStore'])
-            ->name('stok.opname.store');
+        ->name('stok.mutasi');
+        
 });
+
+use App\Http\Controllers\AdminKasir\StockController;
+
+Route::middleware(['auth', 'role:admin_kasir'])
+    ->prefix('admin_kasir')
+    ->name('admin_kasir.')
+    ->group(function () {
+        Route::get('/stok', [StockController::class, 'index'])->name('stok.index');
+        Route::get('/stok/create', [StockController::class, 'create'])->name('stok.create');
+        Route::post('/stok', [StockController::class, 'store'])->name('stok.store');
+    });
+
 

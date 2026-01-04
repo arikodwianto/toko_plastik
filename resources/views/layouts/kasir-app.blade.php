@@ -156,29 +156,38 @@
         <!--begin::Sidebar Wrapper-->
         
         <div class="sidebar-wrapper">
-       <nav class="mt-2">
-  <!-- Sidebar Menu -->
-  <ul
-    class="nav sidebar-menu flex-column"
-    data-lte-toggle="treeview"
-    role="navigation"
-    aria-label="Main navigation"
-    data-accordion="false"
-    id="navigation"
-  >
-    <li class="nav-header">Dashboard</li>
-    <li class="nav-item border-bottom">
-      <a href="{{ route('kasir.dashboard') }}"
-         class="nav-link {{ request()->routeIs('kasir.dashboard') ? 'active bg-primary text-white' : '' }}">
-        <i class="nav-icon bi bi-speedometer2"></i>
-        <p>Home</p>
-      </a>
-    </li>
+ <nav class="mt-2">
+    <!-- Sidebar Menu -->
+    <ul
+        class="nav sidebar-menu flex-column"
+        data-lte-toggle="treeview"
+        role="navigation"
+        aria-label="Main navigation"
+        data-accordion="false"
+        id="navigation"
+    >
+        {{-- Dashboard --}}
+        <li class="nav-header">Dashboard</li>
+        <li class="nav-item border-bottom">
+            <a href="{{ route('kasir.dashboard') }}"
+               class="nav-link {{ request()->routeIs('kasir.dashboard') ? 'active bg-primary text-white' : '' }}">
+                <i class="nav-icon bi bi-speedometer2"></i>
+                <p>Home</p>
+            </a>
+        </li>
 
-
-    
- 
+        {{-- Stok Barang --}}
+        <li class="nav-header">Manajemen Stok</li>
+        <li class="nav-item border-bottom">
+            <a href="{{ route('admin_kasir.stok.index') }}"
+               class="nav-link {{ request()->routeIs('admin_kasir.stok.*') ? 'active bg-primary text-white' : '' }}">
+                <i class="nav-icon bi bi-box-seam"></i>
+                <p>Stok Barang</p>
+            </a>
+        </li>
+    </ul>
 </nav>
+
 
 
 

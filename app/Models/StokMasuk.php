@@ -9,10 +9,9 @@ class StokMasuk extends Model
     protected $table = 'stok_masuk';
 
     protected $fillable = [
-        'item_id',
+        'barang_id',
         'jumlah',
         'supplier',
-        'harga_modal',
         'tanggal_masuk',
     ];
 
