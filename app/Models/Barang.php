@@ -62,4 +62,9 @@ class Barang extends Model
     {
         return $this->stok < 5;
     }
+    public function penjualanDetails()
+{
+    return $this->hasMany(PenjualanDetail::class);
+}
+
 }

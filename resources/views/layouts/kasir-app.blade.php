@@ -156,8 +156,7 @@
         <!--begin::Sidebar Wrapper-->
         
         <div class="sidebar-wrapper">
- <nav class="mt-2">
-    <!-- Sidebar Menu -->
+<nav class="mt-2">
     <ul
         class="nav sidebar-menu flex-column"
         data-lte-toggle="treeview"
@@ -166,23 +165,50 @@
         data-accordion="false"
         id="navigation"
     >
-        {{-- Dashboard --}}
-        <li class="nav-header">Dashboard</li>
+        {{-- ================= Dashboard ================= --}}
+        <li class="nav-header text-uppercase">Dashboard</li>
         <li class="nav-item border-bottom">
-            <a href="{{ route('kasir.dashboard') }}"
-               class="nav-link {{ request()->routeIs('kasir.dashboard') ? 'active bg-primary text-white' : '' }}">
+            <a
+                href="{{ route('kasir.dashboard') }}"
+                class="nav-link {{ request()->routeIs('kasir.dashboard') ? 'active bg-primary text-white' : '' }}"
+            >
                 <i class="nav-icon bi bi-speedometer2"></i>
-                <p>Home</p>
+                <p class="ms-1">Home</p>
             </a>
         </li>
 
-        {{-- Stok Barang --}}
-        <li class="nav-header">Manajemen Stok</li>
+        {{-- ================= Manajemen Stok ================= --}}
+        <li class="nav-header text-uppercase">Manajemen Stok</li>
         <li class="nav-item border-bottom">
-            <a href="{{ route('admin_kasir.stok.index') }}"
-               class="nav-link {{ request()->routeIs('admin_kasir.stok.*') ? 'active bg-primary text-white' : '' }}">
+            <a
+                href="{{ route('admin_kasir.stok.index') }}"
+                class="nav-link {{ request()->routeIs('admin_kasir.stok.*') ? 'active bg-primary text-white' : '' }}"
+            >
                 <i class="nav-icon bi bi-box-seam"></i>
-                <p>Stok Barang</p>
+                <p class="ms-1">Stok Barang</p>
+            </a>
+        </li>
+
+        {{-- ================= Penjualan ================= --}}
+        <li class="nav-header text-uppercase">Penjualan</li>
+
+        <li class="nav-item border-bottom">
+            <a
+                href="{{ route('admin_kasir.penjualan.index') }}"
+                class="nav-link {{ request()->routeIs('admin_kasir.penjualan.index') ? 'active bg-primary text-white' : '' }}"
+            >
+                <i class="nav-icon bi bi-cash-coin"></i>
+                <p class="ms-1">Transaksi Penjualan</p>
+            </a>
+        </li>
+
+        <li class="nav-item border-bottom">
+            <a
+                href="{{ route('admin_kasir.penjualan.riwayat') }}"
+                class="nav-link {{ request()->routeIs('admin_kasir.penjualan.riwayat') ? 'active bg-primary text-white' : '' }}"
+            >
+                <i class="nav-icon bi bi-receipt"></i>
+                <p class="ms-1">Riwayat Penjualan</p>
             </a>
         </li>
     </ul>

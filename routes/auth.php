@@ -87,7 +87,7 @@ Route::middleware(['auth', 'role:owner'])
 });
 
 use App\Http\Controllers\AdminKasir\StockController;
-
+use App\Http\Controllers\AdminKasir\PenjualanController;
 Route::middleware(['auth', 'role:admin_kasir'])
     ->prefix('admin_kasir')
     ->name('admin_kasir.')
@@ -95,6 +95,37 @@ Route::middleware(['auth', 'role:admin_kasir'])
         Route::get('/stok', [StockController::class, 'index'])->name('stok.index');
         Route::get('/stok/create', [StockController::class, 'create'])->name('stok.create');
         Route::post('/stok', [StockController::class, 'store'])->name('stok.store');
+        Route::get('penjualan', 
+        [PenjualanController::class, 'index'])
+        ->name('penjualan.index');
+
+    Route::get('penjualan/cari-barang', 
+        [PenjualanController::class, 'cariBarang'])
+        ->name('penjualan.cari');
+
+    Route::post('penjualan', 
+        [PenjualanController::class, 'store'])
+        ->name('penjualan.store');
+
+    Route::get('penjualan/{id}/struk', 
+        [PenjualanController::class, 'struk'])
+        ->name('penjualan.struk');
+        Route::get('penjualan/riwayat',
+    [PenjualanController::class, 'riwayat'])
+    ->name('penjualan.riwayat');
+
+Route::get('penjualan/{id}/detail',
+    [PenjualanController::class, 'detail'])
+    ->name('penjualan.detail');
+Route::post(
+    'penjualan/{id}/batal',
+    [PenjualanController::class, 'batal']
+)->name('penjualan.batal');
+Route::post(
+    'penjualan/{id}/retur',
+    [PenjualanController::class, 'returItem']
+)->name('penjualan.retur');
+
     });
 
 
