@@ -39,7 +39,7 @@
                     <h5 class="mb-0"><i class="bi bi-cart me-2"></i> Keranjang</h5>
                 </div>
                 <div class="card-body p-3 table-responsive">
-                    <table class="table table-bordered table-striped table-hover align-middle mb-0">
+                    <table class="table table-bordered table-striped table-hover align-middle mb-0" id="dataTable">
                         <thead class="table-primary">
                             <tr>
                                 <th>Barang</th>
@@ -206,7 +206,11 @@ function simpanTransaksi(){
         body: JSON.stringify({
             items: cart.map(i => ({ barang_id: i.id, qty: i.qty, diskon: i.diskon })),
             diskon_total: document.getElementById('diskon_total').value,
-            total_bayar: document.getElementById('totalBayar').value,
+            total_bayar: Number(
+    document.getElementById('totalBayar')
+        .value.replace(/[^0-9]/g, '')
+),
+
             bayar: document.getElementById('bayar').value,
             metode_pembayaran: document.getElementById('metode_pembayaran').value
         })
@@ -215,5 +219,8 @@ function simpanTransaksi(){
     .then(data => alert(data.message))
     .catch(err => alert(err.message));
 }
+
+
+
 </script>
 @endpush

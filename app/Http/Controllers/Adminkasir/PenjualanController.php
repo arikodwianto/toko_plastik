@@ -25,16 +25,19 @@ class PenjualanController extends Controller
      * AJAX
      */
     public function cariBarang(Request $request)
-    {
-        $q = $request->q;
+{
+    $q = $request->q;
 
-        $barang = Barang::where('kode_barang', $q)
-            ->orWhere('nama', 'like', "%{$q}%")
-            ->where('stok', '>', 0)
-            ->first();
+    $barang = Barang::where(function ($query) use ($q) {
+            $query->where('kode_barang', $q)
+                  ->orWhere('nama', 'like', '%' . $q . '%');
+        })
+        ->where('stok', '>', 0)
+        ->first();
 
-        return response()->json($barang);
-    }
+    return response()->json($barang);
+}
+
 
     /**
      * Simpan transaksi penjualan
@@ -50,6 +53,8 @@ class PenjualanController extends Controller
         'total_bayar' => 'required|numeric|min:0',
         'metode_pembayaran' => 'required|in:cash,transfer,qris',
         'bayar' => 'required|numeric|min:0',
+
+        
     ]);
 
     DB::beginTransaction();
