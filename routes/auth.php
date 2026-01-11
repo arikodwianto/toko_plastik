@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Owner\LaporanController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -83,8 +84,39 @@ Route::middleware(['auth', 'role:owner'])
     // === Mutasi ===
     Route::get('/stok/{id}/mutasi', [StockManagementController::class, 'mutasi'])
         ->name('stok.mutasi');
-        
+
+   Route::prefix('laporan')
+        ->name('laporan.')
+        ->group(function () {
+
+        Route::get('/penjualan', [LaporanController::class, 'penjualan'])
+            ->name('penjualan');
+
+        Route::get('/pembelian', [LaporanController::class, 'pembelian'])
+            ->name('pembelian');
+
+        Route::get('/keuntungan', [LaporanController::class, 'keuntungan'])
+            ->name('keuntungan');
+
+        Route::get('/produk', [LaporanController::class, 'produk'])
+            ->name('produk');
+
+        Route::get('/penjualan/excel', [LaporanController::class, 'exportPenjualanExcel'])
+            ->name('penjualan.excel');
+
+        Route::get('/penjualan/pdf', [LaporanController::class, 'exportPenjualanPdf'])
+            ->name('penjualan.pdf');
+         Route::get('/pembelian/pdf', [LaporanController::class, 'exportPembelianPdf'])
+    ->name('pembelian.pdf');
+
+Route::get('/produk/pdf', [LaporanController::class, 'exportProdukPdf'])
+    ->name('produk.pdf');
+
+
+    });
+
 });
+
 
 use App\Http\Controllers\AdminKasir\StockController;
 use App\Http\Controllers\AdminKasir\PenjualanController;

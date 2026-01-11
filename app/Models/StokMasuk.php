@@ -15,8 +15,8 @@ class StokMasuk extends Model
         'tanggal_masuk',
     ];
 
-    public function item()
+    public function barang()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Barang::class, 'barang_id');
     }
 }

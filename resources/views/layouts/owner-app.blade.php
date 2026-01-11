@@ -195,6 +195,56 @@
                 <p>Stok</p>
             </a>
         </li>
+
+        {{-- Laporan --}}
+<li class="nav-header">Laporan</li>
+
+
+
+<li class="nav-item has-treeview {{ request()->routeIs('owner.laporan.*') ? 'menu-open' : '' }}">
+    <a href="#" class="nav-link {{ request()->routeIs('owner.laporan.*') ? 'active bg-primary text-white' : '' }}">
+        <i class="nav-icon bi bi-clipboard-data"></i>
+        <p>
+            Laporan
+            <i class="right bi bi-chevron-down"></i>
+        </p>
+    </a>
+
+    <ul class="nav nav-treeview ms-3">
+        <li class="nav-item">
+            <a href="{{ route('owner.laporan.penjualan') }}"
+               class="nav-link {{ request()->routeIs('owner.laporan.penjualan') ? 'active' : '' }}">
+                <i class="nav-icon bi bi-graph-up-arrow text-success"></i>
+                <p>Penjualan</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('owner.laporan.pembelian') }}"
+               class="nav-link {{ request()->routeIs('owner.laporan.pembelian') ? 'active' : '' }}">
+                <i class="nav-icon bi bi-cart-check text-primary"></i>
+                <p>Pembelian</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('owner.laporan.keuntungan') }}"
+               class="nav-link {{ request()->routeIs('owner.laporan.keuntungan') ? 'active' : '' }}">
+                <i class="nav-icon bi bi-cash-coin text-warning"></i>
+                <p>Keuntungan</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{{ route('owner.laporan.produk') }}"
+               class="nav-link {{ request()->routeIs('owner.laporan.produk') ? 'active' : '' }}">
+                <i class="nav-icon bi bi-box-seam text-info"></i>
+                <p>Produk</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
     </ul>
 </nav>
 

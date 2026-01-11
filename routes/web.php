@@ -2,6 +2,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Owner\UserManagementController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Owner\DashboardController;
+
 
 // REDIRECT KE LOGIN
 Route::get('/', function () {
@@ -15,10 +17,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// DASHBOARD OWNER
-Route::get('/owner/dashboard', function () {
-    return view('owner.dashboard');
-})->middleware(['auth', 'role:owner'])->name('owner.dashboard');
+Route::middleware(['auth', 'role:owner'])
+    ->prefix('owner')
+    ->name('owner.')
+    ->group(function () {
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
+
+    });
+
 
 // DASHBOARD KASIR (role admin_kasir)
 Route::get('/kasir/dashboard', function () {
