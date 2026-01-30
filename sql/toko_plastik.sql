@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 11, 2026 at 03:36 AM
+-- Generation Time: Jan 30, 2026 at 05:23 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.29
 
@@ -43,8 +43,16 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `kode_barang`, `nama`, `stok`, `harga_modal`, `harga_jual`, `created_at`, `updated_at`) VALUES
-(5, 'BRG-0001', 'Kaos Eiger', 2, 11000.00, 13000.00, '2026-01-03 09:41:19', '2026-01-10 07:06:00'),
-(6, 'BRG-0002', 'plastik anti panas', 40, 12000.00, 16000.00, '2026-01-03 10:56:00', '2026-01-05 08:16:44');
+(9, 'BRG-0001', 'Plastik PE 1 Kg', 47, 15000.00, 20000.00, '2026-01-23 04:48:23', '2026-01-24 08:31:29'),
+(10, 'BRG-0002', 'Plastik PP 1 Kg', 57, 16000.00, 21000.00, '2026-01-23 04:48:23', '2026-01-23 04:52:48'),
+(11, 'BRG-0003', 'Plastik HD 1 Kg', 40, 17000.00, 22000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(12, 'BRG-0004', 'Kantong Kresek Hitam', 100, 5000.00, 8000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(13, 'BRG-0005', 'Kantong Kresek Putih', 120, 5500.00, 8500.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(14, 'BRG-0006', 'Plastik Mika', 30, 12000.00, 17000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(15, 'BRG-0007', 'Plastik Vacuum', 25, 20000.00, 26000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(16, 'BRG-0008', 'Plastik Roll Besar', 15, 30000.00, 38000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(17, 'BRG-0009', 'Plastik Roll Kecil', 20, 18000.00, 24000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(18, 'BRG-0010', 'Plastik Es Batu', 80, 7000.00, 11000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23');
 
 -- --------------------------------------------------------
 
@@ -195,35 +203,10 @@ CREATE TABLE `mutasi_stok` (
 --
 
 INSERT INTO `mutasi_stok` (`id`, `barang_id`, `jumlah`, `tipe`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 5, 12, 'masuk', 'Stok masuk dari supplier', '2026-01-03 11:28:31', '2026-01-03 11:28:31'),
-(2, 6, 4, 'masuk', 'Stok masuk dari supplier', '2026-01-03 11:34:48', '2026-01-03 11:34:48'),
-(3, 5, 0, 'opname_plus', 'Stok opname', '2026-01-03 11:41:18', '2026-01-03 11:41:18'),
-(4, 5, 0, 'opname_plus', 'Stok opname', '2026-01-03 11:41:44', '2026-01-03 11:41:44'),
-(5, 6, 3, 'opname_minus', 'Stok opname', '2026-01-03 11:42:05', '2026-01-03 11:42:05'),
-(6, 6, 12, 'masuk', 'Stok masuk dari supplier', '2026-01-04 00:16:19', '2026-01-04 00:16:19'),
-(7, 6, 2, 'masuk', 'Stok masuk oleh admin kasir', '2026-01-05 03:30:22', '2026-01-05 03:30:22'),
-(8, 6, 2, 'keluar', 'Penjualan', '2026-01-05 05:04:38', '2026-01-05 05:04:38'),
-(9, 6, 2, 'keluar', 'Penjualan', '2026-01-05 05:04:51', '2026-01-05 05:04:51'),
-(10, 5, 1, 'keluar', 'Penjualan', '2026-01-05 05:05:57', '2026-01-05 05:05:57'),
-(11, 5, 1, 'keluar', 'Penjualan', '2026-01-05 07:33:39', '2026-01-05 07:33:39'),
-(12, 6, 1, 'keluar', 'Penjualan', '2026-01-05 07:38:15', '2026-01-05 07:38:15'),
-(13, 5, 12, 'masuk', 'Stok masuk oleh admin kasir', '2026-01-05 07:38:46', '2026-01-05 07:38:46'),
-(14, 5, 12, 'keluar', 'Penjualan', '2026-01-05 07:39:30', '2026-01-05 07:39:30'),
-(15, 6, 12, 'keluar', 'Penjualan', '2026-01-05 07:39:30', '2026-01-05 07:39:30'),
-(16, 5, 12, 'retur', 'Pembatalan transaksi TRX-20260105143930', '2026-01-05 07:44:42', '2026-01-05 07:44:42'),
-(17, 6, 12, 'retur', 'Pembatalan transaksi TRX-20260105143930', '2026-01-05 07:44:42', '2026-01-05 07:44:42'),
-(18, 5, 12, 'retur', 'Pembatalan transaksi TRX-20260105143930', '2026-01-05 07:44:50', '2026-01-05 07:44:50'),
-(19, 6, 12, 'retur', 'Pembatalan transaksi TRX-20260105143930', '2026-01-05 07:44:50', '2026-01-05 07:44:50'),
-(20, 6, 1, 'retur', 'Pembatalan transaksi TRX-20260105143815', '2026-01-05 07:45:02', '2026-01-05 07:45:02'),
-(21, 6, 1, 'retur', 'Pembatalan transaksi TRX-20260105143815', '2026-01-05 07:45:09', '2026-01-05 07:45:09'),
-(22, 5, 12, 'retur', 'Pembatalan transaksi TRX-20260105143930', '2026-01-05 07:47:46', '2026-01-05 07:47:46'),
-(23, 6, 12, 'retur', 'Pembatalan transaksi TRX-20260105143930', '2026-01-05 07:47:46', '2026-01-05 07:47:46'),
-(24, 6, 1, 'retur', 'Retur item TRX-20260105143815', '2026-01-05 07:54:13', '2026-01-05 07:54:13'),
-(25, 6, 1, 'retur', 'Pembatalan transaksi TRX-20260105143815', '2026-01-05 07:54:31', '2026-01-05 07:54:31'),
-(26, 6, 1, 'keluar', 'Penjualan', '2026-01-05 08:05:12', '2026-01-05 08:05:12'),
-(27, 6, 1, 'retur', 'Retur item TRX-20260105150512', '2026-01-05 08:16:44', '2026-01-05 08:16:44'),
-(28, 5, 1, 'keluar', 'Penjualan', '2026-01-06 08:05:41', '2026-01-06 08:05:41'),
-(29, 5, 33, 'opname_minus', 'Stok opname', '2026-01-10 07:06:00', '2026-01-10 07:06:00');
+(31, 10, 12, 'masuk', 'Stok masuk dari supplier', '2026-01-23 04:52:48', '2026-01-23 04:52:48'),
+(32, 9, 1, 'keluar', 'Penjualan', '2026-01-23 07:23:03', '2026-01-23 07:23:03'),
+(33, 9, 1, 'keluar', 'Penjualan', '2026-01-24 08:31:22', '2026-01-24 08:31:22'),
+(34, 9, 1, 'keluar', 'Penjualan', '2026-01-24 08:31:29', '2026-01-24 08:31:29');
 
 -- --------------------------------------------------------
 
@@ -263,14 +246,8 @@ CREATE TABLE `penjualans` (
 --
 
 INSERT INTO `penjualans` (`id`, `kode_transaksi`, `tanggal`, `total`, `diskon_total`, `bayar`, `kembalian`, `metode_pembayaran`, `kasir_id`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'TRX-20260105120438', '2026-01-05 12:04:38', 31998.00, 0.00, 120000.00, 88002.00, 'qris', 2, '2026-01-05 05:04:38', '2026-01-05 05:04:38', 'selesai'),
-(2, 'TRX-20260105120451', '2026-01-05 12:04:51', 31998.00, 0.00, 16000.00, -15998.00, 'qris', 2, '2026-01-05 05:04:51', '2026-01-05 05:04:51', 'selesai'),
-(3, 'TRX-20260105120557', '2026-01-05 12:05:57', 13000.00, 0.00, 13000.00, 0.00, 'cash', 2, '2026-01-05 05:05:57', '2026-01-05 05:05:57', 'selesai'),
-(4, 'TRX-20260105143339', '2026-01-05 14:33:39', 13000.00, 0.00, 13000.00, 0.00, 'cash', 2, '2026-01-05 07:33:39', '2026-01-05 07:33:39', 'selesai'),
-(5, 'TRX-20260105143815', '2026-01-05 14:38:15', 0.00, 0.00, 16000.00, 0.00, 'cash', 2, '2026-01-05 07:38:15', '2026-01-05 07:54:31', 'dibatalkan'),
-(6, 'TRX-20260105143930', '2026-01-05 14:39:30', 348000.00, 0.00, 348000.00, 0.00, 'cash', 2, '2026-01-05 07:39:30', '2026-01-05 07:47:46', 'dibatalkan'),
-(7, 'TRX-20260105150512', '2026-01-05 15:05:12', 0.00, 0.00, 16000.00, 0.00, 'cash', 2, '2026-01-05 08:05:12', '2026-01-05 08:16:44', 'selesai'),
-(8, 'TRX-20260106150541', '2026-01-06 15:05:41', 13000.00, 0.00, 13000.00, 0.00, 'cash', 2, '2026-01-06 08:05:41', '2026-01-06 08:05:41', 'selesai');
+(21, 'TRX-20260124153122', '2026-01-24 15:31:22', 20000.00, 0.00, 20000.00, 0.00, 'cash', 2, '2026-01-24 08:31:22', '2026-01-24 08:31:22', 'selesai'),
+(22, 'TRX-20260124153129', '2026-01-24 15:31:29', 20000.00, 0.00, 20000.00, 0.00, 'cash', 2, '2026-01-24 08:31:29', '2026-01-24 08:31:29', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -296,15 +273,8 @@ CREATE TABLE `penjualan_details` (
 --
 
 INSERT INTO `penjualan_details` (`id`, `penjualan_id`, `barang_id`, `harga`, `qty`, `qty_retur`, `diskon`, `subtotal`, `created_at`, `updated_at`) VALUES
-(1, 1, 6, 16000.00, 2, 0, 2.00, 31998.00, '2026-01-05 05:04:38', '2026-01-05 05:04:38'),
-(2, 2, 6, 16000.00, 2, 0, 2.00, 31998.00, '2026-01-05 05:04:51', '2026-01-05 05:04:51'),
-(3, 3, 5, 13000.00, 1, 0, 0.00, 13000.00, '2026-01-05 05:05:57', '2026-01-05 05:05:57'),
-(4, 4, 5, 13000.00, 1, 0, 0.00, 13000.00, '2026-01-05 07:33:39', '2026-01-05 07:33:39'),
-(5, 5, 6, 16000.00, 1, 1, 0.00, 16000.00, '2026-01-05 07:38:15', '2026-01-05 07:54:13'),
-(6, 6, 5, 13000.00, 12, 0, 0.00, 156000.00, '2026-01-05 07:39:30', '2026-01-05 07:39:30'),
-(7, 6, 6, 16000.00, 12, 0, 0.00, 192000.00, '2026-01-05 07:39:30', '2026-01-05 07:39:30'),
-(8, 7, 6, 16000.00, 1, 1, 0.00, 16000.00, '2026-01-05 08:05:12', '2026-01-05 08:16:44'),
-(9, 8, 5, 13000.00, 1, 0, 0.00, 13000.00, '2026-01-06 08:05:41', '2026-01-06 08:05:41');
+(33, 21, 9, 20000.00, 1, 0, 0.00, 20000.00, '2026-01-24 08:31:22', '2026-01-24 08:31:22'),
+(34, 22, 9, 20000.00, 1, 0, 0.00, 20000.00, '2026-01-24 08:31:29', '2026-01-24 08:31:29');
 
 -- --------------------------------------------------------
 
@@ -326,7 +296,10 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('cZ5Dfq4K0GN7EnZ19vqFvPAExSiMzbqrr9GsWRCI', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicXM0Q2FxRENJTDc4WHpwM05Jd2h3UExmekoyb1pyamhRZnl5cU5XNSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fX0=', 1768102569);
+('At5Ws4s9bf6iT93iUCP96lBJAt1vc1nXmNQurFa7', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibVZBSG9OSEoxcHc4M2RGbVVCdWJxWGdtWWVQaVhFdGNMcVRCeXJ1UyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NTM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbl9rYXNpci9wZW5qdWFsYW4vMjEvZGV0YWlsIjtzOjU6InJvdXRlIjtzOjI4OiJhZG1pbl9rYXNpci5wZW5qdWFsYW4uZGV0YWlsIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1769268715),
+('b4rwA8jxKPRaN9IvCfWMKUJRnkvqgTSYCLMjbbLm', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVUV2eE9ZQlkwYnR2UHlhdFlDTndhQlhGZlFTSGtkMXY1M3NxcE1SbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fX0=', 1769178621),
+('EylgGKtW5SJocJFG3Y6Xqwv7T6GriFlSA0kMWTiP', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUGVxdTZKbE5GY2xRZnJJa0xUYk8xRWZpekpvWWxNY0xIcGloWmRpaSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9vd25lci9sYXBvcmFuL3BlbWJlbGlhbiI7czo1OiJyb3V0ZSI7czoyMzoib3duZXIubGFwb3Jhbi5wZW1iZWxpYW4iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1769169193),
+('k1wevWMrIVllaZbdauWbgkoPCZYWCV9gJKR09SfC', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidXZhNlRKVWY4WnJzYkdrVFRqZXpObEdJRVVydUg1ZVhXV2ZMTUJLdCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9vd25lci9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6MTU6Im93bmVyLmRhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769793776);
 
 -- --------------------------------------------------------
 
@@ -350,12 +323,17 @@ CREATE TABLE `stok_masuk` (
 --
 
 INSERT INTO `stok_masuk` (`id`, `barang_id`, `jumlah`, `supplier`, `tanggal_masuk`, `harga_modal`, `created_at`, `updated_at`) VALUES
-(1, 5, 12, 'hu', '2026-01-03 11:26:39', NULL, '2026-01-03 11:26:39', '2026-01-03 11:26:39'),
-(2, 5, 12, 'hu', '2026-01-03 11:28:31', NULL, '2026-01-03 11:28:31', '2026-01-03 11:28:31'),
-(3, 6, 4, 'hu', '2026-01-03 11:34:48', NULL, '2026-01-03 11:34:48', '2026-01-03 11:34:48'),
-(4, 6, 12, 'anh', '2026-01-04 00:16:19', NULL, '2026-01-04 00:16:19', '2026-01-04 00:16:19'),
-(5, 6, 2, 'njhn', '2026-01-05 03:30:22', NULL, '2026-01-05 03:30:22', '2026-01-05 03:30:22'),
-(6, 5, 12, NULL, '2026-01-05 07:38:46', NULL, '2026-01-05 07:38:46', '2026-01-05 07:38:46');
+(7, 10, 12, 'Cv. Hyhy', '2026-01-23 04:52:48', NULL, '2026-01-23 04:52:48', '2026-01-23 04:52:48'),
+(8, 9, 20, 'CV. Sinar Jaya', '2026-01-20 02:00:00', 15000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(9, 10, 30, 'CV. Sinar Jaya', '2026-01-20 02:15:00', 16000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(10, 11, 25, 'CV. Makmur Abadi', '2026-01-21 03:00:00', 17000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(11, 12, 50, 'CV. Makmur Abadi', '2026-01-21 03:30:00', 5000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(12, 13, 40, 'CV. Berkah Plastik', '2026-01-22 04:00:00', 5500.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(13, 14, 15, 'CV. Berkah Plastik', '2026-01-22 07:00:00', 12000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(14, 15, 20, 'CV. Plastik Jaya', '2026-01-23 01:30:00', 20000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(15, 16, 10, 'CV. Plastik Jaya', '2026-01-23 02:00:00', 30000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(16, 17, 60, 'CV. Sinar Jaya', '2026-01-23 03:00:00', 18000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36'),
+(17, 18, 35, 'CV. Makmur Abadi', '2026-01-23 04:00:00', 7000.00, '2026-01-23 14:18:36', '2026-01-23 14:18:36');
 
 -- --------------------------------------------------------
 
@@ -392,9 +370,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Owner User', 'owner@example.com', NULL, '$2y$12$Arg9DmtRt84cJrnr9rAnPO/YqnUoRd/n6z2iatbUn3fQf7gLKHLVK', 'owner', NULL, '2025-12-01 07:59:24', '2025-12-01 07:59:24'),
-(2, 'Ariko DwiAnto', 'arikodwiantostti@gmail.com', NULL, '$2y$12$FVsRHNxC/x4fzJVX5J60cuLph2NNmOA4u0zCGZYQ3MUGzEL.9f8Le', 'admin_kasir', NULL, '2025-12-01 08:00:47', '2026-01-04 00:50:00'),
-(3, 'Ariko DwiAnto', 'juraganngetik@gmail.com', NULL, '$2y$12$bNegegFF85LyGq/ccpXVaebz/54dgp6cdBSHndgVwE1SHgM3Pm8Qy', 'admin_kasir', NULL, '2026-01-03 09:17:33', '2026-01-03 09:17:33');
+(1, 'Owner User', 'owner@example.com', NULL, '$2y$12$Arg9DmtRt84cJrnr9rAnPO/YqnUoRd/n6z2iatbUn3fQf7gLKHLVK', 'owner', '046iwp9ZoD8mL9dEU25YQB6zapBiHkpZtKSB5f0C6ptvIsj3IQZQnCUJj3d8', '2025-12-01 07:59:24', '2025-12-01 07:59:24'),
+(2, 'kasir', 'arikodwiantostti@gmail.com', NULL, '$2y$12$FVsRHNxC/x4fzJVX5J60cuLph2NNmOA4u0zCGZYQ3MUGzEL.9f8Le', 'admin_kasir', 'cs34GqRFpxBnZeQ5xB28AUHUp31V1cczocL8FuMp2TuZgudrHlf9yGpCf1t8', '2025-12-01 08:00:47', '2026-01-23 04:37:56');
 
 --
 -- Indexes for dumped tables
@@ -515,7 +492,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -545,25 +522,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mutasi_stok`
 --
 ALTER TABLE `mutasi_stok`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `penjualans`
 --
 ALTER TABLE `penjualans`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `penjualan_details`
 --
 ALTER TABLE `penjualan_details`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `stok_masuk`
 --
 ALTER TABLE `stok_masuk`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `stok_opname`
@@ -575,7 +552,7 @@ ALTER TABLE `stok_opname`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

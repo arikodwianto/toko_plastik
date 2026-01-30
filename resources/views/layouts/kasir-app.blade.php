@@ -138,12 +138,12 @@
           <!--begin::Brand Link-->
          <a href="{{ route('kasir.dashboard') }}" class="brand-link d-flex align-items-center">
     <!-- Logo -->
-    <img
+    <!-- <img
         src="{{ asset('logo/Lambang_Kota_Tanjungpinang.png') }}"
         alt="Logo"
         class="opacity-75 shadow me-2"
         style="width: 35px; height: 35px; object-fit: contain;"
-    />
+    /> -->
 
     <!-- Teks -->
     <span class="brand-text fw-light" style="font-size: 16px; white-space: nowrap;">
@@ -529,7 +529,7 @@ $(document).ready(function () {
     $.fn.dataTable.ext.errMode = 'none'; // matikan alert warning
     $('#dataTable').DataTable({
         destroy: true,
-        pageLength: 10,
+        pageLength: 5,
         lengthMenu: [5, 10, 25, 50],
         language: { 
             search: "Cari:",
