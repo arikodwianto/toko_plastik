@@ -24,13 +24,15 @@ class PenjualanController extends Controller
      * Cari barang (barcode / nama)
      * AJAX
      */
-    public function cariBarang(Request $request)
+   public function cariBarang(Request $request)
 {
     $q = $request->q;
 
     $barang = Barang::where(function ($query) use ($q) {
-            $query->where('kode_barang', $q)
+
+            $query->where('kode_barang', 'like', '%' . $q . '%')
                   ->orWhere('nama', 'like', '%' . $q . '%');
+
         })
         ->where('stok', '>', 0)
         ->first();
@@ -119,10 +121,16 @@ class PenjualanController extends Controller
         DB::commit();
 
         return response()->json([
-            'success' => true,
-            'id' => $penjualan->id,
-            'message' => 'Transaksi berhasil disimpan'
-        ]);
+    'success' => true,
+    'id' => $penjualan->id,
+
+    'print_url' => route(
+        'admin_kasir.penjualan.struk',
+        $penjualan->id
+    ),
+
+    'message' => 'Transaksi berhasil disimpan'
+]);
 
     } catch (\Exception $e) {
 

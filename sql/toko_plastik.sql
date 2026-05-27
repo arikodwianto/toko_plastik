@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 30, 2026 at 05:23 PM
--- Server version: 8.0.30
--- PHP Version: 8.2.29
+-- Host: 127.0.0.1
+-- Generation Time: May 27, 2026 at 06:17 PM
+-- Server version: 11.8.2-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `barang` (
-  `id` bigint UNSIGNED NOT NULL,
-  `kode_barang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `stok` int NOT NULL DEFAULT '0',
-  `harga_modal` decimal(15,2) NOT NULL DEFAULT '0.00',
-  `harga_jual` decimal(15,2) NOT NULL DEFAULT '0.00',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kode_barang` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `stok` int(11) NOT NULL DEFAULT 0,
+  `harga_modal` decimal(15,2) NOT NULL DEFAULT 0.00,
+  `harga_jual` decimal(15,2) NOT NULL DEFAULT 0.00,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -46,7 +46,7 @@ INSERT INTO `barang` (`id`, `kode_barang`, `nama`, `stok`, `harga_modal`, `harga
 (9, 'BRG-0001', 'Plastik PE 1 Kg', 47, 15000.00, 20000.00, '2026-01-23 04:48:23', '2026-01-24 08:31:29'),
 (10, 'BRG-0002', 'Plastik PP 1 Kg', 57, 16000.00, 21000.00, '2026-01-23 04:48:23', '2026-01-23 04:52:48'),
 (11, 'BRG-0003', 'Plastik HD 1 Kg', 40, 17000.00, 22000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
-(12, 'BRG-0004', 'Kantong Kresek Hitam', 100, 5000.00, 8000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
+(12, 'BRG-0004', 'Kantong Kresek Hitam', 98, 5000.00, 8000.00, '2026-01-23 04:48:23', '2026-05-27 09:14:12'),
 (13, 'BRG-0005', 'Kantong Kresek Putih', 120, 5500.00, 8500.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
 (14, 'BRG-0006', 'Plastik Mika', 30, 12000.00, 17000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
 (15, 'BRG-0007', 'Plastik Vacuum', 25, 20000.00, 26000.00, '2026-01-23 04:48:23', '2026-01-23 04:48:23'),
@@ -61,9 +61,9 @@ INSERT INTO `barang` (`id`, `kode_barang`, `nama`, `stok`, `harga_modal`, `harga
 --
 
 CREATE TABLE `cache` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expiration` int NOT NULL
+  `key` varchar(255) NOT NULL,
+  `value` mediumtext NOT NULL,
+  `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -73,9 +73,9 @@ CREATE TABLE `cache` (
 --
 
 CREATE TABLE `cache_locks` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expiration` int NOT NULL
+  `key` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -85,13 +85,13 @@ CREATE TABLE `cache_locks` (
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -101,11 +101,11 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `items` (
-  `id` bigint UNSIGNED NOT NULL,
-  `nama_item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `stok` int NOT NULL DEFAULT '0',
-  `harga_modal` int NOT NULL DEFAULT '0',
-  `harga_jual` int NOT NULL DEFAULT '0',
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nama_item` varchar(255) NOT NULL,
+  `stok` int(11) NOT NULL DEFAULT 0,
+  `harga_modal` int(11) NOT NULL DEFAULT 0,
+  `harga_jual` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -117,13 +117,13 @@ CREATE TABLE `items` (
 --
 
 CREATE TABLE `jobs` (
-  `id` bigint UNSIGNED NOT NULL,
-  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `attempts` tinyint UNSIGNED NOT NULL,
-  `reserved_at` int UNSIGNED DEFAULT NULL,
-  `available_at` int UNSIGNED NOT NULL,
-  `created_at` int UNSIGNED NOT NULL
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `queue` varchar(255) NOT NULL,
+  `payload` longtext NOT NULL,
+  `attempts` tinyint(3) UNSIGNED NOT NULL,
+  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
+  `available_at` int(10) UNSIGNED NOT NULL,
+  `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -133,16 +133,16 @@ CREATE TABLE `jobs` (
 --
 
 CREATE TABLE `job_batches` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total_jobs` int NOT NULL,
-  `pending_jobs` int NOT NULL,
-  `failed_jobs` int NOT NULL,
-  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `options` mediumtext COLLATE utf8mb4_unicode_ci,
-  `cancelled_at` int DEFAULT NULL,
-  `created_at` int NOT NULL,
-  `finished_at` int DEFAULT NULL
+  `id` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `total_jobs` int(11) NOT NULL,
+  `pending_jobs` int(11) NOT NULL,
+  `failed_jobs` int(11) NOT NULL,
+  `failed_job_ids` longtext NOT NULL,
+  `options` mediumtext DEFAULT NULL,
+  `cancelled_at` int(11) DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `finished_at` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -152,9 +152,9 @@ CREATE TABLE `job_batches` (
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -189,11 +189,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `mutasi_stok` (
-  `id` bigint UNSIGNED NOT NULL,
-  `barang_id` bigint UNSIGNED NOT NULL,
-  `jumlah` int NOT NULL,
-  `tipe` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `barang_id` bigint(20) UNSIGNED NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `tipe` varchar(50) NOT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -206,7 +206,9 @@ INSERT INTO `mutasi_stok` (`id`, `barang_id`, `jumlah`, `tipe`, `keterangan`, `c
 (31, 10, 12, 'masuk', 'Stok masuk dari supplier', '2026-01-23 04:52:48', '2026-01-23 04:52:48'),
 (32, 9, 1, 'keluar', 'Penjualan', '2026-01-23 07:23:03', '2026-01-23 07:23:03'),
 (33, 9, 1, 'keluar', 'Penjualan', '2026-01-24 08:31:22', '2026-01-24 08:31:22'),
-(34, 9, 1, 'keluar', 'Penjualan', '2026-01-24 08:31:29', '2026-01-24 08:31:29');
+(34, 9, 1, 'keluar', 'Penjualan', '2026-01-24 08:31:29', '2026-01-24 08:31:29'),
+(35, 12, 1, 'keluar', 'Penjualan', '2026-05-27 09:05:34', '2026-05-27 09:05:34'),
+(36, 12, 1, 'keluar', 'Penjualan', '2026-05-27 09:14:12', '2026-05-27 09:14:12');
 
 -- --------------------------------------------------------
 
@@ -215,8 +217,8 @@ INSERT INTO `mutasi_stok` (`id`, `barang_id`, `jumlah`, `tipe`, `keterangan`, `c
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -227,18 +229,18 @@ CREATE TABLE `password_reset_tokens` (
 --
 
 CREATE TABLE `penjualans` (
-  `id` bigint UNSIGNED NOT NULL,
-  `kode_transaksi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kode_transaksi` varchar(255) NOT NULL,
   `tanggal` datetime NOT NULL,
   `total` decimal(15,2) NOT NULL,
-  `diskon_total` decimal(15,2) NOT NULL DEFAULT '0.00',
+  `diskon_total` decimal(15,2) NOT NULL DEFAULT 0.00,
   `bayar` decimal(15,2) NOT NULL,
   `kembalian` decimal(15,2) NOT NULL,
-  `metode_pembayaran` enum('cash','transfer','qris') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kasir_id` bigint UNSIGNED NOT NULL,
+  `metode_pembayaran` enum('cash','transfer','qris') NOT NULL,
+  `kasir_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` enum('selesai','dibatalkan') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'selesai'
+  `status` enum('selesai','dibatalkan') NOT NULL DEFAULT 'selesai'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -247,7 +249,9 @@ CREATE TABLE `penjualans` (
 
 INSERT INTO `penjualans` (`id`, `kode_transaksi`, `tanggal`, `total`, `diskon_total`, `bayar`, `kembalian`, `metode_pembayaran`, `kasir_id`, `created_at`, `updated_at`, `status`) VALUES
 (21, 'TRX-20260124153122', '2026-01-24 15:31:22', 20000.00, 0.00, 20000.00, 0.00, 'cash', 2, '2026-01-24 08:31:22', '2026-01-24 08:31:22', 'selesai'),
-(22, 'TRX-20260124153129', '2026-01-24 15:31:29', 20000.00, 0.00, 20000.00, 0.00, 'cash', 2, '2026-01-24 08:31:29', '2026-01-24 08:31:29', 'selesai');
+(22, 'TRX-20260124153129', '2026-01-24 15:31:29', 20000.00, 0.00, 20000.00, 0.00, 'cash', 2, '2026-01-24 08:31:29', '2026-01-24 08:31:29', 'selesai'),
+(23, 'TRX-20260527160534', '2026-05-27 16:05:34', 8000.00, 0.00, 8000.00, 0.00, 'cash', 2, '2026-05-27 09:05:34', '2026-05-27 09:05:34', 'selesai'),
+(24, 'TRX-20260527161412', '2026-05-27 16:14:12', 8000.00, 0.00, 8000.00, 0.00, 'cash', 2, '2026-05-27 09:14:12', '2026-05-27 09:14:12', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -256,13 +260,13 @@ INSERT INTO `penjualans` (`id`, `kode_transaksi`, `tanggal`, `total`, `diskon_to
 --
 
 CREATE TABLE `penjualan_details` (
-  `id` bigint UNSIGNED NOT NULL,
-  `penjualan_id` bigint UNSIGNED NOT NULL,
-  `barang_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `penjualan_id` bigint(20) UNSIGNED NOT NULL,
+  `barang_id` bigint(20) UNSIGNED NOT NULL,
   `harga` decimal(15,2) NOT NULL,
-  `qty` int NOT NULL,
-  `qty_retur` int NOT NULL DEFAULT '0',
-  `diskon` decimal(15,2) NOT NULL DEFAULT '0.00',
+  `qty` int(11) NOT NULL,
+  `qty_retur` int(11) NOT NULL DEFAULT 0,
+  `diskon` decimal(15,2) NOT NULL DEFAULT 0.00,
   `subtotal` decimal(15,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -274,7 +278,9 @@ CREATE TABLE `penjualan_details` (
 
 INSERT INTO `penjualan_details` (`id`, `penjualan_id`, `barang_id`, `harga`, `qty`, `qty_retur`, `diskon`, `subtotal`, `created_at`, `updated_at`) VALUES
 (33, 21, 9, 20000.00, 1, 0, 0.00, 20000.00, '2026-01-24 08:31:22', '2026-01-24 08:31:22'),
-(34, 22, 9, 20000.00, 1, 0, 0.00, 20000.00, '2026-01-24 08:31:29', '2026-01-24 08:31:29');
+(34, 22, 9, 20000.00, 1, 0, 0.00, 20000.00, '2026-01-24 08:31:29', '2026-01-24 08:31:29'),
+(35, 23, 12, 8000.00, 1, 0, 0.00, 8000.00, '2026-05-27 09:05:34', '2026-05-27 09:05:34'),
+(36, 24, 12, 8000.00, 1, 0, 0.00, 8000.00, '2026-05-27 09:14:12', '2026-05-27 09:14:12');
 
 -- --------------------------------------------------------
 
@@ -283,12 +289,12 @@ INSERT INTO `penjualan_details` (`id`, `penjualan_id`, `barang_id`, `harga`, `qt
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int NOT NULL
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -299,6 +305,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 ('At5Ws4s9bf6iT93iUCP96lBJAt1vc1nXmNQurFa7', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibVZBSG9OSEoxcHc4M2RGbVVCdWJxWGdtWWVQaVhFdGNMcVRCeXJ1UyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NTM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbl9rYXNpci9wZW5qdWFsYW4vMjEvZGV0YWlsIjtzOjU6InJvdXRlIjtzOjI4OiJhZG1pbl9rYXNpci5wZW5qdWFsYW4uZGV0YWlsIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1769268715),
 ('b4rwA8jxKPRaN9IvCfWMKUJRnkvqgTSYCLMjbbLm', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiVUV2eE9ZQlkwYnR2UHlhdFlDTndhQlhGZlFTSGtkMXY1M3NxcE1SbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7czo1OiJyb3V0ZSI7czo1OiJsb2dpbiI7fX0=', 1769178621),
 ('EylgGKtW5SJocJFG3Y6Xqwv7T6GriFlSA0kMWTiP', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiUGVxdTZKbE5GY2xRZnJJa0xUYk8xRWZpekpvWWxNY0xIcGloWmRpaSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9vd25lci9sYXBvcmFuL3BlbWJlbGlhbiI7czo1OiJyb3V0ZSI7czoyMzoib3duZXIubGFwb3Jhbi5wZW1iZWxpYW4iO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1769169193),
+('GGG6kH6YbjWQHwspF5LCxBm0HL5G7o0jaFgN8NwF', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoic1VKTmNKQk1yaFprSHc0d2VKZHVYUnMwdFdXTGRkcU9jc2llZURCbyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9rYXNpci9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6MTU6Imthc2lyLmRhc2hib2FyZCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1779898637),
 ('k1wevWMrIVllaZbdauWbgkoPCZYWCV9gJKR09SfC', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoidXZhNlRKVWY4WnJzYkdrVFRqZXpObEdJRVVydUg1ZVhXV2ZMTUJLdCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9vd25lci9kYXNoYm9hcmQiO3M6NToicm91dGUiO3M6MTU6Im93bmVyLmRhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1769793776);
 
 -- --------------------------------------------------------
@@ -308,11 +315,11 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 
 CREATE TABLE `stok_masuk` (
-  `id` bigint UNSIGNED NOT NULL,
-  `barang_id` bigint UNSIGNED NOT NULL,
-  `jumlah` int NOT NULL,
-  `supplier` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tanggal_masuk` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `barang_id` bigint(20) UNSIGNED NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `supplier` varchar(255) DEFAULT NULL,
+  `tanggal_masuk` timestamp NOT NULL DEFAULT current_timestamp(),
   `harga_modal` decimal(15,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -342,7 +349,7 @@ INSERT INTO `stok_masuk` (`id`, `barang_id`, `jumlah`, `supplier`, `tanggal_masu
 --
 
 CREATE TABLE `stok_opname` (
-  `id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -354,13 +361,13 @@ CREATE TABLE `stok_opname` (
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` enum('owner','admin_kasir') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'admin_kasir',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('owner','admin_kasir') NOT NULL DEFAULT 'admin_kasir',
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -370,8 +377,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Owner User', 'owner@example.com', NULL, '$2y$12$Arg9DmtRt84cJrnr9rAnPO/YqnUoRd/n6z2iatbUn3fQf7gLKHLVK', 'owner', '046iwp9ZoD8mL9dEU25YQB6zapBiHkpZtKSB5f0C6ptvIsj3IQZQnCUJj3d8', '2025-12-01 07:59:24', '2025-12-01 07:59:24'),
-(2, 'kasir', 'arikodwiantostti@gmail.com', NULL, '$2y$12$FVsRHNxC/x4fzJVX5J60cuLph2NNmOA4u0zCGZYQ3MUGzEL.9f8Le', 'admin_kasir', 'cs34GqRFpxBnZeQ5xB28AUHUp31V1cczocL8FuMp2TuZgudrHlf9yGpCf1t8', '2025-12-01 08:00:47', '2026-01-23 04:37:56');
+(1, 'Owner User', 'owner@example.com', NULL, '$2y$12$Arg9DmtRt84cJrnr9rAnPO/YqnUoRd/n6z2iatbUn3fQf7gLKHLVK', 'owner', 'eQbDCsBFz6Tdvm8HhVXnBvaKt4JARHaLo4cUfYoOI5BGbFvFyty0oFSrazDk', '2025-12-01 07:59:24', '2025-12-01 07:59:24'),
+(2, 'kasir', 'admin@gmail.com', NULL, '$2y$12$IM/kmM7wdV1pKR92gcAoJeKoC.3jU6yI1nhQQLb8V9K5Jt/VlTZRm', 'admin_kasir', 'cs34GqRFpxBnZeQ5xB28AUHUp31V1cczocL8FuMp2TuZgudrHlf9yGpCf1t8', '2025-12-01 08:00:47', '2026-05-27 09:00:53');
 
 --
 -- Indexes for dumped tables
@@ -492,67 +499,67 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `mutasi_stok`
 --
 ALTER TABLE `mutasi_stok`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `penjualans`
 --
 ALTER TABLE `penjualans`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `penjualan_details`
 --
 ALTER TABLE `penjualan_details`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `stok_masuk`
 --
 ALTER TABLE `stok_masuk`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `stok_opname`
 --
 ALTER TABLE `stok_opname`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -574,7 +581,7 @@ ALTER TABLE `penjualans`
 -- Constraints for table `penjualan_details`
 --
 ALTER TABLE `penjualan_details`
-  ADD CONSTRAINT `penjualan_details_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`) ON DELETE RESTRICT,
+  ADD CONSTRAINT `penjualan_details_barang_id_foreign` FOREIGN KEY (`barang_id`) REFERENCES `barang` (`id`),
   ADD CONSTRAINT `penjualan_details_penjualan_id_foreign` FOREIGN KEY (`penjualan_id`) REFERENCES `penjualans` (`id`) ON DELETE CASCADE;
 
 --

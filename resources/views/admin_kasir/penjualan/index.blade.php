@@ -29,7 +29,7 @@
             {{-- Cari Barang --}}
             <div class="card shadow-sm border-0 rounded-3 mb-3">
                 <div class="card-body">
-                    <input type="text" id="cariBarang" class="form-control form-control-lg" placeholder="ketik nama barang">
+                    <input type="text" id="cariBarang" class="form-control form-control-lg" placeholder="ketik nama barang/kode barang">
                 </div>
             </div>
 
@@ -195,7 +195,11 @@ function hitungKembalian(){
 }
 
 function simpanTransaksi(){
-    if(cart.length === 0){ alert('Keranjang kosong'); return; }
+
+    if(cart.length === 0){
+        alert('Keranjang kosong');
+        return;
+    }
 
     fetch(`{{ route('admin_kasir.penjualan.store') }}`, {
         method: 'POST',
@@ -203,23 +207,62 @@ function simpanTransaksi(){
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
+
         body: JSON.stringify({
-            items: cart.map(i => ({ barang_id: i.id, qty: i.qty, diskon: i.diskon })),
-            diskon_total: document.getElementById('diskon_total').value,
+
+            items: cart.map(i => ({
+                barang_id: i.id,
+                qty: i.qty,
+                diskon: i.diskon
+            })),
+
+            diskon_total:
+                document.getElementById('diskon_total').value,
+
             total_bayar: Number(
-    document.getElementById('totalBayar')
-        .value.replace(/[^0-9]/g, '')
-),
+                document.getElementById('totalBayar')
+                    .value.replace(/[^0-9]/g, '')
+            ),
 
             bayar: document.getElementById('bayar').value,
-            metode_pembayaran: document.getElementById('metode_pembayaran').value
+
+            metode_pembayaran:
+                document.getElementById('metode_pembayaran').value
         })
     })
-    .then(res => res.ok ? res.json() : res.json().then(e => Promise.reject(e)))
-    .then(data => alert(data.message))
+
+    .then(res =>
+        res.ok
+            ? res.json()
+            : res.json().then(e => Promise.reject(e))
+    )
+
+    .then(data => {
+
+        alert(data.message);
+
+        // buka struk otomatis
+        window.open(data.print_url, '_blank');
+
+        // reset cart
+        cart = [];
+        renderCart();
+
+        // reset form pembayaran
+        document.getElementById('diskon_total').value = 0;
+        document.getElementById('bayar').value = '';
+        document.getElementById('kembalian').value = '';
+
+        // fokus ke pencarian barang
+        document.getElementById('cariBarang').focus();
+
+    })
+
     .catch(err => alert(err.message));
 }
-
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('cariBarang').focus();
+});
 
 
 </script>

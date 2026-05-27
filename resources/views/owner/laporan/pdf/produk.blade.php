@@ -46,7 +46,7 @@
                 @foreach($produk as $i => $p)
                 <tr>
                     <td>{{ $i+1 }}</td>
-                    <td>{{ $p->nama }}</td>
+                    <td>{{ $p->barang->nama ?? '-' }}</td>
                     <td>{{ $p->total_terjual }}</td>
                     <td>Rp {{ number_format($p->omzet,0,',','.') }}</td>
                 </tr>

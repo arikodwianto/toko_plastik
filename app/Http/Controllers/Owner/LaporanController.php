@@ -23,38 +23,30 @@ class LaporanController extends Controller
     /**
      * ===============================
      * 1️⃣ LAPORAN PENJUALAN
-     * Harian / Mingguan / Bulanan
+     *  Bulanan
      * ===============================
      */
     public function penjualan(Request $request)
-    {
-        $query = Penjualan::where('status', 'selesai');
+{
+    $query = Penjualan::with('kasir')
+        ->where('status', 'selesai');
 
-        if ($request->filter === 'harian' && $request->tanggal) {
-            $query->whereDate('tanggal', $request->tanggal);
-        }
+    // Filter Bulanan
+    if ($request->bulan) {
 
-        if ($request->filter === 'mingguan') {
-            $query->whereBetween('tanggal', [
-                now()->startOfWeek(),
-                now()->endOfWeek()
-            ]);
-        }
+        $query->whereYear('tanggal', substr($request->bulan, 0, 4))
+              ->whereMonth('tanggal', substr($request->bulan, 5, 2));
 
-        if ($request->filter === 'bulanan' && $request->bulan) {
-            $query->whereMonth('tanggal', substr($request->bulan, 5, 2))
-                  ->whereYear('tanggal', substr($request->bulan, 0, 4));
-        }
-
-        $penjualans = $query->orderByDesc('tanggal')->get();
-
-        return view('owner.laporan.penjualan', [
-            'penjualans' => $penjualans,
-            'totalTransaksi' => $penjualans->count(),
-            'totalPenjualan' => $penjualans->sum('total'),
-        ]);
     }
 
+    $penjualans = $query->latest()->get();
+
+    return view('owner.laporan.penjualan', [
+        'penjualans'     => $penjualans,
+        'totalTransaksi' => $penjualans->count(),
+        'totalPenjualan' => $penjualans->sum('total'),
+    ]);
+}
     /**
      * ===============================
      * 2️⃣ LAPORAN PEMBELIAN (STOK MASUK)
@@ -63,9 +55,12 @@ class LaporanController extends Controller
     public function pembelian(Request $request)
     {
         $stokMasuk = StokMasuk::with('barang')
-            ->when($request->tanggal, function ($q) use ($request) {
-                $q->whereDate('tanggal_masuk', $request->tanggal);
-            })
+            ->when($request->bulan, function ($q) use ($request) {
+
+    $q->whereYear('tanggal_masuk', substr($request->bulan, 0, 4))
+      ->whereMonth('tanggal_masuk', substr($request->bulan, 5, 2));
+
+})
             ->orderByDesc('tanggal_masuk')
             ->get();
 
@@ -150,7 +145,7 @@ public function exportPenjualanPdf()
 {
     $penjualans = Penjualan::where('status','selesai')->get();
     $pdf = PDF::loadView('owner.laporan.pdf.penjualan', compact('penjualans'));
-    return $pdf->download('laporan-penjualan.pdf');
+    return $pdf->stream('laporan-penjualan.pdf');
 }
 
 
@@ -173,15 +168,25 @@ public function exportPembelianPdf(Request $request)
     return $pdf->stream('laporan-pembelian.pdf');
 }
 public function exportProdukPdf()
-    {
-        $produk = Barang::withCount('penjualanDetails')
-            ->orderByDesc('penjualan_details_count')
-            ->get();
+{
+    $produk = PenjualanDetail::select(
+            'barang_id',
+            DB::raw('SUM(qty) as total_terjual'),
+            DB::raw('SUM(subtotal) as omzet')
+        )
+        ->whereHas('penjualan', function ($q) {
+            $q->where('status', 'selesai');
+        })
+        ->groupBy('barang_id')
+        ->with('barang')
+        ->orderByDesc('total_terjual')
+        ->get();
 
-        $pdf = Pdf::loadView('owner.laporan.pdf.produk', compact('produk'))
-                  ->setPaper('A4', 'portrait');
+    $pdf = Pdf::loadView(
+        'owner.laporan.pdf.produk',
+        compact('produk')
+    )->setPaper('A4', 'portrait');
 
-        return $pdf->download('laporan-produk-terlaris.pdf');
-    }
-
+    return $pdf->stream('laporan-produk-terlaris.pdf');
+}
 }

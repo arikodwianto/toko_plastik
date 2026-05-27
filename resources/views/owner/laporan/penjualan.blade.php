@@ -30,21 +30,24 @@
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
                     <form method="GET" class="row g-2 align-items-end">
-                        
-                      
 
-                        <div class="col-md-3">
-                            <label class="form-label">Bulan</label>
-                            <input type="month" name="bulan" class="form-control"
-                                   value="{{ request('bulan') }}">
-                        </div>
+    <div class="col-md-3">
+        <label class="form-label">Bulan</label>
 
-                        <div class="col-md-3">
-                            <button class="btn btn-primary w-100">
-                                <i class="bi bi-funnel-fill me-1"></i> Terapkan
-                            </button>
-                        </div>
-                    </form>
+        <input type="month"
+               name="bulan"
+               class="form-control"
+               value="{{ request('bulan') }}">
+    </div>
+
+    <div class="col-md-3">
+        <button class="btn btn-primary w-100">
+            <i class="bi bi-funnel-fill me-1"></i>
+            Terapkan
+        </button>
+    </div>
+
+</form>
                 </div>
             </div>
 
@@ -75,8 +78,8 @@
             </div>
             <!-- Tombol Aksi -->
 <div class="d-flex justify-content-end mb-3 gap-2">
-    
-    <a href="{{ route('owner.laporan.penjualan.excel') }}"
+
+    <a href="{{ route('owner.laporan.penjualan.excel', request()->query()) }}"
        class="btn btn-success btn-sm">
         <i class="bi bi-file-earmark-excel me-1"></i> Excel
     </a>
@@ -85,8 +88,8 @@
        class="btn btn-danger btn-sm">
         <i class="bi bi-file-earmark-pdf me-1"></i> PDF
     </a>
-</div>
 
+</div>
 
             <!-- Tabel -->
             <div class="card shadow-lg border-0 rounded-3">

@@ -31,11 +31,13 @@
                 <div class="card-body">
                     <form method="GET" class="row g-2 align-items-end">
                         <div class="col-md-4">
-                            <label class="form-label">Tanggal</label>
-                            <input type="date" name="tanggal"
-                                   value="{{ request('tanggal') }}"
-                                   class="form-control">
-                        </div>
+    <label class="form-label">Bulan</label>
+
+    <input type="month"
+           name="bulan"
+           value="{{ request('bulan') }}"
+           class="form-control">
+</div>
 
                         <div class="col-md-2">
                             <button class="btn btn-primary w-100">
@@ -63,13 +65,12 @@
 
             <!-- Tombol Aksi (DI LUAR CARD) -->
             <div class="d-flex justify-content-end mb-3">
-                <a href="{{ route('owner.laporan.pembelian.pdf') }}"
-                   class="btn btn-danger btn-sm"
-                   target="_blank">
-                    <i class="bi bi-file-earmark-pdf me-1"></i> Cetak PDF
-                </a>
-            </div>
-
+    <a href="{{ route('owner.laporan.pembelian.pdf', request()->query()) }}"
+       class="btn btn-danger btn-sm"
+       target="_blank">
+        <i class="bi bi-file-earmark-pdf me-1"></i> Cetak PDF
+    </a>
+</div>
             <!-- Tabel -->
             <div class="card shadow-lg border-0 rounded-3">
                 <div class="card-header bg-primary text-white">
