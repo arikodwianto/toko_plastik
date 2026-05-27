@@ -29,7 +29,7 @@
             {{-- Cari Barang --}}
             <div class="card shadow-sm border-0 rounded-3 mb-3">
                 <div class="card-body">
-                    <input type="text" id="cariBarang" class="form-control form-control-lg" placeholder="Scan barcode / ketik nama barang">
+                    <input type="text" id="cariBarang" class="form-control form-control-lg" placeholder="ketik nama barang">
                 </div>
             </div>
 

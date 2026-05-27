@@ -30,21 +30,8 @@
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-body">
                     <form method="GET" class="row g-2 align-items-end">
-                        <div class="col-md-3">
-                            <label class="form-label">Filter</label>
-                            <select name="filter" class="form-select">
-                                <option value="">-- Pilih Filter --</option>
-                                <option value="harian" {{ request('filter')=='harian' ? 'selected' : '' }}>Harian</option>
-                                <option value="mingguan" {{ request('filter')=='mingguan' ? 'selected' : '' }}>Mingguan</option>
-                                <option value="bulanan" {{ request('filter')=='bulanan' ? 'selected' : '' }}>Bulanan</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">Tanggal</label>
-                            <input type="date" name="tanggal" class="form-control"
-                                   value="{{ request('tanggal') }}">
-                        </div>
+                        
+                      
 
                         <div class="col-md-3">
                             <label class="form-label">Bulan</label>
